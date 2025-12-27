@@ -1,0 +1,16 @@
+a. - ext4 
+   - maximum number of file is 4 billion
+   - file size limitation is 16 TiB
+  (This is specific to my device. Please check yours using "df -T /".)
+
+b. It affects test.h (same Inode), but not test.s. Symbolic links only store the path to the file and always appear to have full permissions.
+
+c. A symbolic link only stores the path to the original file, while a hard link shares the same Inode but cannot be created for a directory.
+
+d. It is not possible to hard link a directory because it would break the filesystem's tree structure. This creates infinite loops for recursive programs and causes ambiguity for parent directory, making it impossible to determine the correct path back.
+
+e. The block size is 4096 bytes. When the file is larger than 4096 bytes, the system will allocate a new block.
+
+f. - The filesystem is proc. It resides in memory.
+   - It suggests the current system state. It contains information about hardware and running processes.
+   - They are symbolic links pointing to the actual files opened by the process.

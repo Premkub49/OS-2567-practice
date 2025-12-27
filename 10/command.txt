@@ -1,0 +1,13 @@
+1. mkdir mydir
+2. echo "hello" > ./mydir/test.txt
+3. cd mydir
+4. ln -s test.txt test.s 
+5. ln test.txt test.h
+6. ls -li (just for check symlink and hardlink)
+7. cd ..
+8. ln -s mydir mydir.s
+9. ls -li (just for check symlink)
+10. yes "hello" | head -n 1024 > test.h
+11. ls -li test.txt (display the information about the file test.txt)
+12. cd /proc/$$ (go to your shell process)
+13. ls -li ./fd
