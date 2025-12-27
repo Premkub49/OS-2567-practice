@@ -1,0 +1,8 @@
+1. cal -y
+2. wc -l /etc/passwd
+3. wc -w /etc/hosts
+4. head --lines=3 /etc/passwd
+5. tail --lines=4 /etc/hosts
+6. grep $(whoami) /etc/passwd
+7. gcc 07.c -o 07
+8. gcc -S 08.c -o 08.asm && cat 08.asm
