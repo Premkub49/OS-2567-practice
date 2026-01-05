@@ -1,4 +1,4 @@
-1. cal -y
+1. cal -y 2006
 2. wc -l /etc/passwd
 3. wc -w /etc/hosts
 4. head --lines=3 /etc/passwd
