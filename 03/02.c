@@ -11,6 +11,10 @@ printf("Error : cannot fork\n");
 exit(1);
 }
 else if (pid == 0) {
+if (argc < 2){
+    printf("Please enter UNIX command\n");
+    exit(1);
+}
 execvp(argv[1], &argv[1]);
 }
 else {
