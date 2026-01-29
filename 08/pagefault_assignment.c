@@ -1,7 +1,7 @@
 // A program to simulates page faults and calculates page fault rate.
 // Input: a list of page references (a series of page numbers, separated by a space).
 // Output: page fault rate
-// Options: 
+// Options:
 //   -v        --> verbose mode: print the result of every page reference
 //   -a <alg>  --> choose algorithm: fifo (default) or lru
 
@@ -35,9 +35,9 @@ int get_free_frame(int page_number, int timestamp) {
             if (frames[i].page_number == -1) {
                     // Assignment 1.1
                     // Update frames[i], and num_free_frames
-
-
-				
+                    frames[i].page_number = page_number;
+                    frames[i].timestamp = timestamp;
+                    num_free_frames--;
                     return i;
             }
         }
@@ -46,22 +46,26 @@ int get_free_frame(int page_number, int timestamp) {
     else { // all frames are occupied
         int oldest_frame = 0;
         int min_timestamp = frames[0].timestamp;
-		
+
         // Assignment 1.2
         // Find the oldest frame that is to be replaced
-
-
-
+        for (int i=1; i< num_frames; i++){
+            if (min_timestamp > frames[i].timestamp){
+                oldest_frame = i;
+                min_timestamp = frames[i].timestamp;
+            }
+        }
         // Assignment 1.3
         // invalidate the replaced page in the page table (valid=0)
-
-
+        int oldest_page_number = frames[oldest_frame].page_number;
+        page_table[oldest_page_number].valid = 0;
+        page_table[oldest_page_number].frame = 0;
 
         // Assignment 1.4
         // assign page number and timestamp to the selected frame (frames[oldest_frame])
+        frames[oldest_frame].page_number = page_number;
+        frames[oldest_frame].timestamp = timestamp;
 
-
-		
 
         return oldest_frame;
     }
@@ -147,7 +151,7 @@ int main(int argc, char *argv[]) {
                         page_table[page_number].frame = frame_number;
                         if (verbose) printf("Page fault at page %d: allocated into frame %d\n", page_number, frame_number);
                 }
-                else 
+                else
                         fprintf(stderr, "Page fault at page %d: No Free Frame!\n", page_number);
         }
         else {
@@ -155,7 +159,7 @@ int main(int argc, char *argv[]) {
                 if (use_lru) {
                 // Assignment 2
                 // Update timestamp of the referenced page in the frames list
-
+                frames[page_table[page_number].frame].timestamp = page_references;
 
 
                 }
